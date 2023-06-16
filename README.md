@@ -1,4 +1,4 @@
-# DataAnalysis
+# SQL CheatSheet
 *   Hi there! What can I do for you?
     
     SQL cheatsheet table handling code and explainations
