@@ -433,8 +433,8 @@ Certainly! Here's the continuation of the advanced Pandas cheat sheet for data a
 
 
 
-```import matplotlib.pyplot as plt  colors = {'category1': 'red', 'category2': 'blue', 'category3': 'green'} plt.scatter(df['x_column'], df['y_column'], c=df['category_column'].map(colors)) plt.show()```
-
-
-
-
+```import matplotlib.pyplot as plt  
+   colors = {'category1': 'red', 'category2': 'blue', 'category3': 'green'} 
+   plt.scatter(df['x_column'], df['y_column'], c=df['category_column'].map(colors)) 
+   plt.show()
+   ```
