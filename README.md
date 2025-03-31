@@ -1,9 +1,9 @@
 # SQL CheatSheet
-*   Welcome to the SQL cheatsheet by Mohammad Sefidgar
+*   Welcome to the SQL cheatsheet by Mohammad Sefidgar 
     
     SQL cheatsheet table handling code and explainations
     
-    Sure, here's a basic SQL cheat sheet for handling tables:
+    A basic SQL cheat sheet for handling tables:
     
     **Creating a table:**
     
