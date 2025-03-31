@@ -1,5 +1,5 @@
 # SQL CheatSheet
-*   Hi there! What can I do for you?
+*   Welcome to the SQL cheatsheet by Mohammad Sefidgar
     
     SQL cheatsheet table handling code and explainations
     
