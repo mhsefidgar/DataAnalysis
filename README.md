@@ -385,4 +385,4 @@ Example:
       password VARCHAR(50)
     );
 
-
+Thanks for visiting this repository 🌹
