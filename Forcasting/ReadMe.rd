@@ -1,99 +1,103 @@
-🔮 Forecasting Models Comparison
-Welcome to Forecasting Models Comparison — a hands-on exploration of how statistical and machine learning methods perform on synthetic time-series forecasting tasks.
-This project compares models like ARIMA, Prophet, XGBoost, LightGBM, and Hybrid approaches on datasets with pure trends, noise, and optional seasonality.
+# 📈 Forecasting Models Comparison
 
-🧭 Overview
-Forecasting future values from time-series data is both an art and a science.
-This repository demonstrates how different models behave when faced with simple and complex patterns in data.
-Key ideas:
+Welcome to the **Forecasting Models Comparison** repository! This project demonstrates how different time series forecasting models perform on synthetic datasets, focusing on **pure trend data**.
 
+---
 
-Understand how classical and ML models handle trends
+## 🔹 Overview
 
+We generated **synthetic time series data** representing a simple linear trend with Gaussian noise, and then compared multiple forecasting models:
 
-See how explicit time features improve machine learning forecasts
+* Classical statistical models: `ARIMA`, `SARIMA`
+* Decomposition-based models: `STL + XGBoost`
+* Machine learning models: `XGBoost`, `LightGBM`
+* Hybrid models: `ARIMA + XGBoost residuals`
+* Additive trend model: `Prophet`
 
+The goal is to analyze **accuracy**, **overfitting**, and **trend-handling capabilities** of each approach.
 
-Combine methods into hybrid architectures for better accuracy
+---
 
+## 🔹 20-Year Pure Trend Experiment
 
+| Model                    | RMSE      | Notes                                                 |
+| ------------------------ | --------- | ----------------------------------------------------- |
+| Prophet                  | **2.064** | Excellent for pure trend, minimal overfitting         |
+| Hybrid (ARIMA + XGBoost) | 4.799     | Improves ARIMA residuals but still worse than Prophet |
+| ARIMA (5,1,0)            | 5.281     | Classical differencing works, but less precise        |
+| SARIMA (5,1,0)(0,0,0)12  | 5.281     | Same as ARIMA; no seasonal pattern present            |
+| SARIMA (1,1,0)(0,0,0)12  | 5.559     | Slightly worse than ARIMA                             |
+| STL + XGBoost            | 5.786     | Decomposition less useful on pure trend               |
+| XGBoost (Trend Only)     | 6.001     | Overfits slightly even with explicit trend            |
+| XGBoost (Lags + Trend)   | 6.205     | Lag features do not help in pure trend data           |
+| LightGBM (Lags + Trend)  | 7.832     | Overfits more heavily with lags                       |
+| LightGBM (Trend Only)    | 8.408     | Struggles to generalize on pure trend                 |
 
-⚙️ Features
-✨ Synthetic Data Generation – create pure-trend or trend + seasonal data
-🔁 Lag Feature Engineering – autoregressive lag features for ML models
-🧠 Model Zoo – ARIMA, Prophet, XGBoost, LightGBM, Hybrid models
-📊 RMSE Comparison – compare performance across techniques
-🎨 Matplotlib Visualizations – clear forecast vs. actual plots
+---
 
-🤖 Models Compared
-🧩 Model🏗️ Type📈 Trend Handling🔁 Seasonality📝 DescriptionARIMAStatistical✅⚠️ (limited)Classic differenced regressionXGBoost / LightGBMMachine Learning✅ (via time index)❌Learns nonlinear trend patternsHybrid ARIMA + XGBoostHybrid✅✅Combines linear & nonlinear effectsSTL + XGBoostHybrid✅✅Decomposes signal before modelingProphetAdditive Model✅✅Auto-trend & seasonal decomposition
+## 🔹 Key Insights
 
-📈 Example Visualization
+* **Prophet excels** on pure trends due to its additive trend model.
+* **Hybrid approaches** improve classical ARIMA forecasts but are less effective than Prophet for simple trends.
+* **ML models** (XGBoost, LightGBM) may **overfit**, especially when using lag features without seasonality.
+* **STL decomposition** is valuable when seasonality exists but provides limited benefit on pure trend data.
+* **ARIMA/SARIMA** are decent but cannot beat additive trend modeling for long-term linear trends.
 
+---
 
-🪞 Each model’s forecast is shown against the true values, with RMSE scores displayed in the legend.
+## 🔹 Repository Contents
 
+```
+├── data/           # Synthetic datasets and examples
+├── notebooks/      # Jupyter notebooks for experiments
+├── models/         # Saved model artifacts
+├── scripts/        # Python scripts for generating data & forecasts
+└── README.md       # Project overview
+```
 
-🚀 Getting Started
-1️⃣ Clone the Repository
-git clone https://github.com/yourusername/forecasting-models-comparison.git
-cd forecasting-models-comparison
+---
 
-2️⃣ Install Dependencies
-pip install -r requirements.txt
+## 🔹 Usage
 
-Or manually:
-pip install prophet lightgbm xgboost statsmodels scikit-learn matplotlib pandas numpy
+1. Clone the repository:
 
-3️⃣ Run Experiments
-python forecast_comparison.py
+```bash
+git clone https://github.com/yourusername/forecasting-comparison.git
+cd forecasting-comparison
+```
 
+2. Install dependencies:
 
-🧩 Example Usage
-🔹 Pure Trend Forecast
-df = generate_pure_trend_data(10)
-compare_models_extended(df, n_train_years=9, title_suffix="10-Year Series")
+```bash
+pip install prophet xgboost lightgbm statsmodels scikit-learn matplotlib pandas numpy
+```
 
-🔹 Trend + Seasonality Forecast
-df = generate_data_with_trend_and_seasonality(10)
-compare_models(df, n_train_years=9)
+3. Run the forecasting experiments:
 
+```bash
+python scripts/run_forecasting.py
+```
 
-📊 Sample RMSE Results
-🧠 Model📅 10-Year Series📅 20-Year SeriesARIMA2.372.05XGBoost (Trend)1.891.76LightGBM (Trend)1.951.82Hybrid⭐ 1.55⭐ 1.41STL + XGBoost1.701.52Prophet1.921.85
+4. Visualize results with the provided plots.
 
-💡 Results vary slightly depending on the random seed.
+---
 
+## 🔹 Future Work
 
-🧰 Repository Structure
-forecasting-models-comparison/
-│
-├── forecast_comparison.py         # Main experiment script
-├── requirements.txt               # Dependency list
-├── docs/
-│   └── example_forecast_plot.png  # Example visualization
-└── README.md                      # This documentation
+* Add **seasonal and cyclic patterns** to test STL, Prophet, and hybrid approaches.
+* Evaluate **multi-step forecasts** and prediction intervals.
+* Compare **other ML models** like CatBoost or deep learning LSTMs.
+* Optimize hyperparameters for **robust model comparison**.
 
+---
 
-🧑‍💻 Author
-Your Name
-📧 your.email@example.com
-🌐 GitHub Profile
+## 🔹 License
 
-🪄 License
-📝 This project is licensed under the MIT License — free to use, modify, and distribute.
+This project is licensed under the MIT License. 📝
 
-🌟 Acknowledgments
+---
 
+## 🔹 Contact
 
-📚 Facebook Prophet for additive time-series modeling
-
-
-🧠 XGBoost and LightGBM for gradient boosting power
-
-
-📊 StatsModels and STL decomposition for classical trend analysis
-
-
-
-Would you like me to add shields.io badges (Python 🐍 version, License 📜, Stars ⭐, etc.) at the top so it looks like a professional open-source project?
+Created with ❤️ by [Your Name]
+GitHub: [https://github.com/yourusername](https://github.com/yourusername)
